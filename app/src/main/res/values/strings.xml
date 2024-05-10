@@ -1,3 +1,13 @@
 <resources>
     <string name="app_name">Github User V4</string>
+    <string name="user_name">username</string>
+    <string name="followers">Followers</string>
+    <string name="following">Following</string>
+    <string name="check_on_github">Check on Github</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="searchbar_hint">search user</string>
+    <string name="simple_loading_text">…</string>
+    <string name="loading">Loading…</string>
+    <string name="dark_mode">Dark Mode</string>
+    <string name="favorite_users">Favorite Users</string>
 </resources>

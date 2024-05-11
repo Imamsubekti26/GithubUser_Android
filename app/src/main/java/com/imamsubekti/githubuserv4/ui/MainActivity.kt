@@ -1,5 +1,6 @@
 package com.imamsubekti.githubuserv4.ui
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.KeyEvent
 import androidx.appcompat.app.AppCompatActivity
@@ -54,6 +55,8 @@ class MainActivity : AppCompatActivity() {
                     true
                 }
                 R.id.favorite_users -> {
+                    val toDetail = Intent(this, FavoriteActivity::class.java)
+                    startActivity(toDetail)
                     true
                 }
                 else -> false

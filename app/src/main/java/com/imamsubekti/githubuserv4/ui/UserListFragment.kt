@@ -1,24 +1,31 @@
 package com.imamsubekti.githubuserv4.ui
 
 import android.annotation.SuppressLint
+import android.app.Application
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.imamsubekti.githubusersv2.entity.UserResponse
 import com.imamsubekti.githubuserv4.databinding.FragmentUserListBinding
 import com.imamsubekti.githubuserv4.view_model.FollowerViewModel
 import com.imamsubekti.githubuserv4.view_model.FollowingViewModel
 import com.imamsubekti.githubuserv4.view_model.MainViewModel
 import com.imamsubekti.githubuserv4.ui.adapter.UserListAdapter
+import com.imamsubekti.githubuserv4.view_model.DetailViewModel
+import com.imamsubekti.githubuserv4.view_model.FavoriteViewModel
+import com.imamsubekti.githubuserv4.view_model.factory.FavoriteViewModelFactory
 
-class UserListFragment : Fragment() {
+class UserListFragment(private val application: Application? = null) : Fragment() {
     private val mainViewModel by viewModels<MainViewModel>()
     private val followerViewModel by viewModels<FollowerViewModel>()
     private val followingViewModel by viewModels<FollowingViewModel>()
+    private lateinit var favoriteViewModel: FavoriteViewModel
     private var _binding: FragmentUserListBinding? = null
     private val binding get() = _binding!!
 
@@ -40,6 +47,7 @@ class UserListFragment : Fragment() {
             0 -> getFollowers(username as String)
             1 -> getFollowing(username as String)
             2 -> findUsers(username as String)
+            3 -> getFavoriteUsers()
         }
 
         val context = requireContext()
@@ -100,6 +108,19 @@ class UserListFragment : Fragment() {
             if (it) {
                 showErrorMsg()
             }
+        }
+    }
+
+    private fun getFavoriteUsers() {
+        val factory = FavoriteViewModelFactory.getInstance(application as Application)
+        favoriteViewModel = ViewModelProvider(this, factory)[FavoriteViewModel::class.java]
+        favoriteViewModel.getAll().observe(viewLifecycleOwner) { response ->
+
+            val users = response.map {
+                UserResponse(login = it.username, avatarUrl = it.picture)
+            }
+            binding.rvUser.adapter = UserListAdapter(users)
+            showLoading(false)
         }
     }
 

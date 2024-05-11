@@ -1,16 +1,15 @@
 package com.imamsubekti.githubuserv4.ui.adapter
 
 import android.content.Context
+import android.content.Intent
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.imamsubekti.githubusersv2.entity.SearchResponse
 import com.imamsubekti.githubusersv2.entity.UserResponse
-import com.imamsubekti.githubuserv4.R
 import com.imamsubekti.githubuserv4.databinding.UserCardBinding
+import com.imamsubekti.githubuserv4.ui.DetailActivity
 
 class UserListAdapter(private val dataList: SearchResponse) :
     RecyclerView.Adapter<UserListAdapter.UserViewHolder>() {
@@ -30,7 +29,15 @@ class UserListAdapter(private val dataList: SearchResponse) :
     }
 
     class UserViewHolder (private val binding: UserCardBinding) : RecyclerView.ViewHolder(binding.root) {
-
+        init {
+            binding.userCard.setOnClickListener {
+                val context = binding.userCard.context
+                val toDetail = Intent(context, DetailActivity::class.java).apply {
+                    putExtra(DetailActivity.USER_PROFILE, binding.userName.text.toString())
+                }
+                context.startActivity(toDetail)
+            }
+        }
 
         fun bind(context: Context, user: UserResponse) {
             binding.userName.text = user.login

@@ -3,22 +3,26 @@ package com.imamsubekti.githubuserv4.ui
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.util.Log
 import android.view.View
-import androidx.activity.viewModels
 import androidx.annotation.StringRes
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.ViewModelProvider
 import androidx.viewpager2.widget.ViewPager2
 import com.bumptech.glide.Glide
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 import com.imamsubekti.githubuserv4.R
 import com.imamsubekti.githubuserv4.databinding.ActivityDetailBinding
+import com.imamsubekti.githubuserv4.entity.FavoriteUser
 import com.imamsubekti.githubuserv4.view_model.DetailViewModel
 import com.imamsubekti.githubuserv4.ui.adapter.SectionPagerAdaptor
+import com.imamsubekti.githubuserv4.view_model.factory.FavoriteViewModelFactory
 
 class DetailActivity : AppCompatActivity() {
     private lateinit var binding: ActivityDetailBinding
-    private val detailViewModel by viewModels<DetailViewModel>()
+    private lateinit var detailViewModel: DetailViewModel
+    private var userParcel: FavoriteUser? = null
     companion object {
         @StringRes
         private val TAB_TITLES = intArrayOf(
@@ -34,7 +38,13 @@ class DetailActivity : AppCompatActivity() {
 
         val username = intent.getStringExtra(USER_PROFILE) as String
 
+        userParcel = FavoriteUser()
+
+        val factory = FavoriteViewModelFactory.getInstance(this.application)
+        detailViewModel = ViewModelProvider(this, factory)[DetailViewModel::class.java]
+
         loadDetail(username)
+        setupFavorite(username)
         setupTabSection(username)
     }
 
@@ -54,7 +64,28 @@ class DetailActivity : AppCompatActivity() {
                 val intent = Intent(Intent.ACTION_VIEW, Uri.parse(response.htmlUrl))
                 startActivity(intent)
             }
+            userParcel?.id = response.id
+            userParcel?.username = response.login
+            userParcel?.picture = response.avatarUrl
             showLoading(false)
+        }
+    }
+
+    private fun setupFavorite(username: String){
+        detailViewModel.isFavorite.observe(this) {
+            Log.i("DetailActivity", "loadDetail: favorite is $it")
+            val buttonFav = binding.buttonAddToFavorite
+            if (it) {
+                buttonFav.setIconResource(R.drawable.ic_heart_block)
+                buttonFav.setOnClickListener {
+                    detailViewModel.removeFromFavorite(userParcel as FavoriteUser)
+                }
+            } else {
+                buttonFav.setIconResource(R.drawable.ic_heart_outline)
+                buttonFav.setOnClickListener {
+                    detailViewModel.addToFavorite(userParcel as FavoriteUser)
+                }
+            }
         }
     }
 

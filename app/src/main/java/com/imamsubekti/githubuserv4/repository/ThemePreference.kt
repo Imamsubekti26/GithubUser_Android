@@ -1,4 +1,4 @@
-package com.imamsubekti.githubuserv4.config
+package com.imamsubekti.githubuserv4.repository
 
 import android.content.Context
 import androidx.datastore.core.DataStore

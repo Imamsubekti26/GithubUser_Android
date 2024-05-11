@@ -1,40 +1,40 @@
-package com.imamsubekti.githubuserv4.model
+package com.imamsubekti.githubuserv4.view_model
 
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.imamsubekti.githubusersv2.entity.DetailResponse
-import com.imamsubekti.githubuserv4.config.ApiConfig
+import com.imamsubekti.githubusersv2.entity.SearchResponse
+import com.imamsubekti.githubuserv4.network.ApiConfig
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class DetailViewModel: ViewModel() {
+class MainViewModel: ViewModel() {
     private val apiService = ApiConfig.getApiService()
 
-    private val _userDetail = MutableLiveData<DetailResponse>()
-    val userDetail: LiveData<DetailResponse> = _userDetail
+    private val _listUser = MutableLiveData<SearchResponse>()
+    val listUser: LiveData<SearchResponse> = _listUser
 
     private val _error = MutableLiveData<Boolean>()
     val error: LiveData<Boolean> = _error
 
-    private val _username = MutableLiveData<String>()
-    var username: String
-        get() = _username.value ?: "imamsubekti"
+    private val _searchKeyword = MutableLiveData<String>()
+    var searchKeyword: String
+        get() = _searchKeyword.value ?: "imamsubekti"
         set(value) {
-            _username.value = value
-            updateUserDetail(value)
+            _searchKeyword.value = value
+            updateList(value)
         }
 
-    private fun updateUserDetail(username: String){
-        apiService.getDetail(username).enqueue(object : Callback<DetailResponse>{
+    private fun updateList(username: String){
+        apiService.getSearch(username).enqueue(object : Callback<SearchResponse>{
             override fun onResponse(
-                call: Call<DetailResponse>,
-                response: Response<DetailResponse>
+                call: Call<SearchResponse>,
+                response: Response<SearchResponse>
             ) {
                 if (response.isSuccessful) {
-                    _userDetail.postValue(response.body())
+                    _listUser.postValue(response.body())
                     _error.value = false
                     Log.e("MainViewModel", "onResponseSuccess" )
                 } else {
@@ -43,7 +43,7 @@ class DetailViewModel: ViewModel() {
                 }
             }
 
-            override fun onFailure(call: Call<DetailResponse>, t: Throwable) {
+            override fun onFailure(call: Call<SearchResponse>, t: Throwable) {
                 _error.value = true
                 Log.e("MainViewModel", "onResponseFailure: ${t.message}")
             }

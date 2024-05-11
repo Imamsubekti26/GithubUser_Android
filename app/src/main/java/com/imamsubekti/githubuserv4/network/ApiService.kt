@@ -1,4 +1,4 @@
-package com.imamsubekti.githubuserv4.repository
+package com.imamsubekti.githubuserv4.network
 
 import com.imamsubekti.githubusersv2.entity.DetailResponse
 import com.imamsubekti.githubusersv2.entity.UserResponse

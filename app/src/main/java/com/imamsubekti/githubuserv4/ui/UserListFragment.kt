@@ -10,9 +10,9 @@ import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.imamsubekti.githubuserv4.databinding.FragmentUserListBinding
-import com.imamsubekti.githubuserv4.model.FollowerViewModel
-import com.imamsubekti.githubuserv4.model.FollowingViewModel
-import com.imamsubekti.githubuserv4.model.MainViewModel
+import com.imamsubekti.githubuserv4.view_model.FollowerViewModel
+import com.imamsubekti.githubuserv4.view_model.FollowingViewModel
+import com.imamsubekti.githubuserv4.view_model.MainViewModel
 import com.imamsubekti.githubuserv4.ui.adapter.UserListAdapter
 
 class UserListFragment : Fragment() {

@@ -6,11 +6,11 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.lifecycle.ViewModelProvider
 import com.imamsubekti.githubuserv4.R
-import com.imamsubekti.githubuserv4.config.ThemePreference
-import com.imamsubekti.githubuserv4.config.ViewModelFactory
-import com.imamsubekti.githubuserv4.config.dataStore
+import com.imamsubekti.githubuserv4.repository.ThemePreference
+import com.imamsubekti.githubuserv4.view_model.factory.ThemeViewModelFactory
+import com.imamsubekti.githubuserv4.repository.dataStore
 import com.imamsubekti.githubuserv4.databinding.ActivityMainBinding
-import com.imamsubekti.githubuserv4.model.DarkModeViewModel
+import com.imamsubekti.githubuserv4.view_model.DarkModeViewModel
 
 class MainActivity : AppCompatActivity() {
 
@@ -29,7 +29,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun setupDarkMode() {
         val pref = ThemePreference.getInstance(application.dataStore)
-        darkModeViewModel = ViewModelProvider(this, ViewModelFactory(pref))[DarkModeViewModel::class.java]
+        darkModeViewModel = ViewModelProvider(this, ThemeViewModelFactory(pref))[DarkModeViewModel::class.java]
         darkModeViewModel.getThemeSettings().observe(this) {
             if (it) {
                 AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)

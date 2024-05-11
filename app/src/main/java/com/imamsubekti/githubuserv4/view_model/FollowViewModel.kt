@@ -1,11 +1,11 @@
-package com.imamsubekti.githubuserv4.model
+package com.imamsubekti.githubuserv4.view_model
 
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.imamsubekti.githubusersv2.entity.UserResponse
-import com.imamsubekti.githubuserv4.config.ApiConfig
+import com.imamsubekti.githubuserv4.network.ApiConfig
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response

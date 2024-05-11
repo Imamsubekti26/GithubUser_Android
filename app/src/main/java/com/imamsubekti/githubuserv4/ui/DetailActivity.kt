@@ -13,7 +13,7 @@ import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 import com.imamsubekti.githubuserv4.R
 import com.imamsubekti.githubuserv4.databinding.ActivityDetailBinding
-import com.imamsubekti.githubuserv4.model.DetailViewModel
+import com.imamsubekti.githubuserv4.view_model.DetailViewModel
 import com.imamsubekti.githubuserv4.ui.adapter.SectionPagerAdaptor
 
 class DetailActivity : AppCompatActivity() {

@@ -1,7 +1,6 @@
-package com.imamsubekti.githubuserv4.config
+package com.imamsubekti.githubuserv4.network
 
 import com.imamsubekti.githubuserv4.BuildConfig
-import com.imamsubekti.githubuserv4.repository.ApiService
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit

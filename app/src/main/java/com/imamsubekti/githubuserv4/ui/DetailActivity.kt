@@ -62,6 +62,11 @@ class DetailActivity : AppCompatActivity() {
         val tabs: TabLayout = binding.tabs
         val viewPager: ViewPager2 = binding.viewPager
 
+        viewPager.adapter = SectionPagerAdaptor(this, username)
+
+        TabLayoutMediator(tabs, viewPager) {tab, position ->
+            tab.text = resources.getString(TAB_TITLES[position])
+        }.attach()
     }
 
     private fun showLoading(isLoading: Boolean = true){

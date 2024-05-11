@@ -6,12 +6,11 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.imamsubekti.githubusersv2.entity.SearchResponse
 import com.imamsubekti.githubusersv2.entity.UserResponse
 import com.imamsubekti.githubuserv4.databinding.UserCardBinding
 import com.imamsubekti.githubuserv4.ui.DetailActivity
 
-class UserListAdapter(private val dataList: SearchResponse) :
+class UserListAdapter(private val dataList: List<UserResponse>) :
     RecyclerView.Adapter<UserListAdapter.UserViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): UserViewHolder {
@@ -20,12 +19,11 @@ class UserListAdapter(private val dataList: SearchResponse) :
     }
 
     override fun getItemCount(): Int {
-        return dataList.items.size
+        return dataList.size
     }
 
     override fun onBindViewHolder(holder: UserViewHolder, position: Int) {
-        val users = dataList.items
-        holder.bind(holder.itemView.context, users[position])
+        holder.bind(holder.itemView.context, dataList[position])
     }
 
     class UserViewHolder (private val binding: UserCardBinding) : RecyclerView.ViewHolder(binding.root) {

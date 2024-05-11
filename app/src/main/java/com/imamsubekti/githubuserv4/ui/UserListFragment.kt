@@ -2,22 +2,23 @@ package com.imamsubekti.githubuserv4.ui
 
 import android.annotation.SuppressLint
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.LifecycleOwner
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.imamsubekti.githubuserv4.databinding.FragmentUserListBinding
+import com.imamsubekti.githubuserv4.model.FollowerViewModel
+import com.imamsubekti.githubuserv4.model.FollowingViewModel
 import com.imamsubekti.githubuserv4.model.MainViewModel
 import com.imamsubekti.githubuserv4.ui.adapter.UserListAdapter
 
 class UserListFragment : Fragment() {
     private val mainViewModel by viewModels<MainViewModel>()
+    private val followerViewModel by viewModels<FollowerViewModel>()
+    private val followingViewModel by viewModels<FollowingViewModel>()
     private var _binding: FragmentUserListBinding? = null
     private val binding get() = _binding!!
 
@@ -49,11 +50,39 @@ class UserListFragment : Fragment() {
     }
 
     private fun getFollowers(searchKey: String) {
-        TODO("Not yet implemented")
+        if (searchKey != followerViewModel.searchKeyword){
+            showLoading()
+            followerViewModel.searchKeyword = searchKey
+        }
+
+        followerViewModel.listUser.observe(viewLifecycleOwner) {
+            binding.rvUser.adapter = UserListAdapter(it)
+            showLoading(false)
+        }
+
+        followerViewModel.error.observe(viewLifecycleOwner) {
+            if (it) {
+                showErrorMsg()
+            }
+        }
     }
 
     private fun getFollowing(searchKey: String) {
-        TODO("Not yet implemented")
+        if (searchKey != followingViewModel.searchKeyword){
+            showLoading()
+            followingViewModel.searchKeyword = searchKey
+        }
+
+        followingViewModel.listUser.observe(viewLifecycleOwner) {
+            binding.rvUser.adapter = UserListAdapter(it)
+            showLoading(false)
+        }
+
+        followingViewModel.error.observe(viewLifecycleOwner) {
+            if (it) {
+                showErrorMsg()
+            }
+        }
     }
 
     private fun findUsers(searchKey: String) {
@@ -63,7 +92,7 @@ class UserListFragment : Fragment() {
         }
 
         mainViewModel.listUser.observe(viewLifecycleOwner) {
-            binding.rvUser.adapter = UserListAdapter(it)
+            binding.rvUser.adapter = UserListAdapter(it.items)
             showLoading(false)
         }
 

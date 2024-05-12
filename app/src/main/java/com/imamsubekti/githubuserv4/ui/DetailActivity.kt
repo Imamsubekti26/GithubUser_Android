@@ -3,7 +3,6 @@ package com.imamsubekti.githubuserv4.ui
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import androidx.annotation.StringRes
 import androidx.appcompat.app.AppCompatActivity
@@ -72,18 +71,17 @@ class DetailActivity : AppCompatActivity() {
     }
 
     private fun setupFavorite(username: String){
-        detailViewModel.isFavorite.observe(this) {
-            Log.i("DetailActivity", "loadDetail: favorite is $it")
+        detailViewModel.countByUsername(username).observe(this) {
             val buttonFav = binding.buttonAddToFavorite
-            if (it) {
-                buttonFav.setIconResource(R.drawable.ic_heart_block)
-                buttonFav.setOnClickListener {
-                    detailViewModel.removeFromFavorite(userParcel as FavoriteUser)
-                }
-            } else {
+            if (it.isEmpty()) {
                 buttonFav.setIconResource(R.drawable.ic_heart_outline)
                 buttonFav.setOnClickListener {
                     detailViewModel.addToFavorite(userParcel as FavoriteUser)
+                }
+            } else {
+                buttonFav.setIconResource(R.drawable.ic_heart_block)
+                buttonFav.setOnClickListener {
+                    detailViewModel.removeFromFavorite(userParcel as FavoriteUser)
                 }
             }
         }

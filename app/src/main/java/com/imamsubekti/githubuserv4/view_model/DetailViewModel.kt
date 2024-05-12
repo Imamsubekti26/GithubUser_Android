@@ -24,16 +24,12 @@ class DetailViewModel(application: Application): ViewModel() {
 
     private val favoriteRepository = FavoriteRepository(application)
 
-    private val _isFavorite = MutableLiveData<Boolean>()
-    val isFavorite: LiveData<Boolean> = _isFavorite
-
     private val _username = MutableLiveData<String>()
     var username: String
         get() = _username.value ?: "imamsubekti"
         set(value) {
             _username.value = value
             updateUserDetail(value)
-            favoriteCheck(value)
         }
 
     private fun updateUserDetail(username: String){
@@ -45,10 +41,9 @@ class DetailViewModel(application: Application): ViewModel() {
                 if (response.isSuccessful) {
                     _userDetail.postValue(response.body())
                     _error.value = false
-                    Log.e("MainViewModel", "onResponseSuccess" )
                 } else {
                     _error.value = true
-                    Log.e("MainViewModel", "onResponseFailure: ${response.message()}" )
+                    Log.e("DetailViewModel", "onResponseFailure: ${response.message()}" )
                 }
             }
 
@@ -59,24 +54,10 @@ class DetailViewModel(application: Application): ViewModel() {
         })
     }
 
-    private fun favoriteCheck(username: String) {
-//        val dataSize = favoriteRepository.show(username).value
-        val dataSize = 0
-        Log.i("DetailViewModel", "favoriteCheck: is running with value $dataSize")
-        if (dataSize != null) {
-            _isFavorite.postValue( dataSize > 0)
-        } else {
-            _isFavorite.postValue(false)
-        }
-    }
+    fun countByUsername(username: String) = favoriteRepository.countByUsername(username)
 
-    fun addToFavorite(user: FavoriteUser) {
-        favoriteRepository.insert(user)
-        _isFavorite.postValue(true)
-    }
+    fun addToFavorite(user: FavoriteUser) = favoriteRepository.insert(user)
 
-    fun removeFromFavorite(user: FavoriteUser) {
-        favoriteRepository.delete(user)
-        _isFavorite.postValue(false)
-    }
+    fun removeFromFavorite(user: FavoriteUser)= favoriteRepository.delete(user)
+
 }

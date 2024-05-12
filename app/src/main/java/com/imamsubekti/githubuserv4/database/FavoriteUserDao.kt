@@ -20,5 +20,5 @@ interface FavoriteUserDao {
     fun getAll(): LiveData<List<FavoriteUser>>
 
     @Query("SELECT * FROM favoriteuser WHERE username = :username")
-    fun show(username: String): LiveData<List<FavoriteUser>>
+    fun countByUsername(username: String): LiveData<List<FavoriteUser>>
 }

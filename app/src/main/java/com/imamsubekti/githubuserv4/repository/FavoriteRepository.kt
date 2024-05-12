@@ -19,7 +19,7 @@ class FavoriteRepository(application: Application) {
 
     fun getAll(): LiveData<List<FavoriteUser>> = favoriteUserDao.getAll()
 
-    fun show(username: String): LiveData<List<FavoriteUser>> = favoriteUserDao.show(username)
+    fun countByUsername(username: String): LiveData<List<FavoriteUser>> = favoriteUserDao.countByUsername(username)
 
     fun insert(user: FavoriteUser) {
         executorService.execute { favoriteUserDao.insert(user) }

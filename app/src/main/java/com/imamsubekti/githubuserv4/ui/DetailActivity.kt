@@ -1,5 +1,6 @@
 package com.imamsubekti.githubuserv4.ui
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
@@ -67,10 +68,22 @@ class DetailActivity : AppCompatActivity() {
                 val intent = Intent(Intent.ACTION_VIEW, Uri.parse(response.htmlUrl))
                 startActivity(intent)
             }
+            binding.buttonToShare.setOnClickListener {
+                val intent = Intent(Intent.ACTION_SEND)
+                intent.type = "text/plain"
+                intent.putExtra(Intent.EXTRA_TEXT, response.htmlUrl)
+                startActivity(Intent.createChooser(intent, "Bagikan link melalui..."))
+            }
             userParcel?.id = response.id
             userParcel?.username = response.login
             userParcel?.picture = response.avatarUrl
             showLoading(false)
+        }
+
+        detailViewModel.error.observe(this) {
+            if (it) {
+                showErrorMsg()
+            }
         }
     }
 
@@ -113,5 +126,13 @@ class DetailActivity : AppCompatActivity() {
             binding.mainLinearLayout.visibility = View.VISIBLE
 
         }
+    }
+
+    @SuppressLint("SetTextI18n")
+    private fun showErrorMsg() {
+        showLoading(false)
+        binding.mainLinearLayout.visibility = View.GONE
+        binding.errorMsg.visibility = View.VISIBLE
+        binding.errorMsg.text = "Ada error cuy, coba lagi taun depan"
     }
 }

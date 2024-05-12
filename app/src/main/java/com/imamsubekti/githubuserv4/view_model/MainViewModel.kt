@@ -36,7 +36,6 @@ class MainViewModel: ViewModel() {
                 if (response.isSuccessful) {
                     _listUser.postValue(response.body())
                     _error.value = false
-                    Log.e("MainViewModel", "onResponseSuccess" )
                 } else {
                     _error.value = true
                     Log.e("MainViewModel", "onResponseFailure: ${response.message()}" )

@@ -38,16 +38,15 @@ abstract class FollowViewModel: ViewModel() {
                 if (response.isSuccessful) {
                     _listUser.postValue(response.body())
                     _error.value = false
-                    Log.e("MainViewModel", "onResponseSuccess" )
                 } else {
                     _error.value = true
-                    Log.e("MainViewModel", "onResponseFailure: ${response.message()}" )
+                    Log.e("FollowViewModel", "onResponseFailure: ${response.message()}" )
                 }
             }
 
             override fun onFailure(call: Call<List<UserResponse>>, t: Throwable) {
                 _error.value = true
-                Log.e("MainViewModel", "onResponseFailure: ${t.message}")
+                Log.e("FollowViewModel", "onResponseFailure: ${t.message}")
             }
         })
     }

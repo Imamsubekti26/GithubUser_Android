@@ -5,7 +5,7 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.imamsubekti.githubusersv2.entity.DetailResponse
+import com.imamsubekti.githubuserv4.entity.DetailResponse
 import com.imamsubekti.githubuserv4.entity.FavoriteUser
 import com.imamsubekti.githubuserv4.network.ApiConfig
 import com.imamsubekti.githubuserv4.repository.FavoriteRepository

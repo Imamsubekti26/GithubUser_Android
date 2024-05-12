@@ -6,7 +6,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.imamsubekti.githubusersv2.entity.UserResponse
+import com.imamsubekti.githubuserv4.entity.UserResponse
 import com.imamsubekti.githubuserv4.databinding.UserCardBinding
 import com.imamsubekti.githubuserv4.ui.DetailActivity
 

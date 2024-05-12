@@ -1,8 +1,8 @@
 package com.imamsubekti.githubuserv4.network
 
-import com.imamsubekti.githubusersv2.entity.DetailResponse
-import com.imamsubekti.githubusersv2.entity.UserResponse
-import com.imamsubekti.githubusersv2.entity.SearchResponse
+import com.imamsubekti.githubuserv4.entity.DetailResponse
+import com.imamsubekti.githubuserv4.entity.UserResponse
+import com.imamsubekti.githubuserv4.entity.SearchResponse
 import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.Path

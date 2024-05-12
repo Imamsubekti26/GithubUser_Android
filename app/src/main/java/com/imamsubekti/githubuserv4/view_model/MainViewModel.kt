@@ -4,7 +4,7 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.imamsubekti.githubusersv2.entity.SearchResponse
+import com.imamsubekti.githubuserv4.entity.SearchResponse
 import com.imamsubekti.githubuserv4.network.ApiConfig
 import retrofit2.Call
 import retrofit2.Callback

@@ -8,7 +8,7 @@ import com.imamsubekti.githubuserv4.entity.FavoriteUser
 
 @Database(entities = [FavoriteUser::class], version = 1)
 abstract class FavoriteUserRoom: RoomDatabase() {
-    abstract fun savedUserDao(): FavoriteUserDao
+    abstract fun favoriteUserDao(): FavoriteUserDao
 
     companion object {
         @Volatile

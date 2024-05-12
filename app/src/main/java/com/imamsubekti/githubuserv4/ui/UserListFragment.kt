@@ -11,13 +11,12 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.imamsubekti.githubusersv2.entity.UserResponse
+import com.imamsubekti.githubuserv4.entity.UserResponse
 import com.imamsubekti.githubuserv4.databinding.FragmentUserListBinding
 import com.imamsubekti.githubuserv4.view_model.FollowerViewModel
 import com.imamsubekti.githubuserv4.view_model.FollowingViewModel
 import com.imamsubekti.githubuserv4.view_model.MainViewModel
 import com.imamsubekti.githubuserv4.ui.adapter.UserListAdapter
-import com.imamsubekti.githubuserv4.view_model.DetailViewModel
 import com.imamsubekti.githubuserv4.view_model.FavoriteViewModel
 import com.imamsubekti.githubuserv4.view_model.factory.FavoriteViewModelFactory
 

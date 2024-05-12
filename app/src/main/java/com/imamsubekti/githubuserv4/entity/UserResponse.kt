@@ -1,4 +1,4 @@
-package com.imamsubekti.githubusersv2.entity
+package com.imamsubekti.githubuserv4.entity
 
 import com.google.gson.annotations.SerializedName
 
